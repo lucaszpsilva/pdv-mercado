@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tela Inicial PDV</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h1>Bem-vindo ao PDV</h1>
+    <div class="grid">
+      <button
+        onclick="window.electronAPI.abrirJanela('venda.html')"
+        class="icon-btn"
+      >
+        <img src="icons/shopping-cart-svgrepo-com.svg" alt="Iniciar Venda" />
+        <span>Venda</span>
+      </button>
+      <button onClick="abrirJanela('produtos.html')" class="icon-btn">
+        <img src="icons/cases-svgrepo-com.svg" alt="Produtos" />
+        <span>Produtos</span>
+      </button>
+      <button onClick="abrirJanela('relatorios.html')" class="icon-btn">
+        <img src="icons/report-svgrepo-com.svg" alt="Relatórios" />
+        <span>Relatórios</span>
+      </button>
+      <button onClick="abrirJanela('configuracoes.html')" class="icon-btn">
+        <img src="icons/settings-svgrepo-com.svg" alt="Configurações" />
+        <span>Configurações</span>
+      </button>
+      <button onclick="window.electronAPI.sairDoApp()" class="icon-btn sair">
+        <img src="icons/logout-svgrepo-com.svg" alt="Sair" />
+        <span>Sair</span>
+      </button>
+    </div>
+  </body>
+</html>

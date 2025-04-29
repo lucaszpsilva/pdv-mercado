@@ -1,0 +1,59 @@
+body {
+  margin: 0;
+  background-color: #2b3a4a;
+  color: white;
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+h1 {
+  margin-bottom: 40px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 150px);
+  gap: 30px;
+}
+
+.icon-btn.sair {
+  background-color: #c9c9c9;
+}
+
+.icon-btn.sair:hover {
+  background-color: #ffffff;
+}
+
+.icon-btn {
+  background-color: #3e546a;
+  border: none;
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.icon-btn:hover {
+  background-color: #4f6a84;
+}
+
+.icon-btn img {
+  width: 48px;
+  height: 48px;
+  margin-bottom: 10px;
+}
+
+.icon-btn span {
+  font-size: 16px;
+}
+
+/* PAGINA DE VENDAS */
+/* PAGINA DE VENDAS */
