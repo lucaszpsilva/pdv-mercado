@@ -1,12 +1,139 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>PDV - Venda</title>
-    <link rel="stylesheet" href="style.css" />
+    <title>PDV - Tela de Venda</title>
+    <link rel="stylesheet" href="venda.css" />
   </head>
   <body>
-    <script src="venda.js"></script>
+    <div class="top">
+      <ul>
+        <li>Vendedor:</li>
+        <li>Cliente:</li>
+      </ul>
+    </div>
+
+    <div class="container">
+      <h1>PDV - Tela de Venda</h1>
+
+      <label for="codigo">Código do Produto:</label>
+      <input
+        type="text"
+        id="codigo"
+        placeholder="Digite ou escaneie o código"
+      />
+      <button onclick="adicionarProduto()">Adicionar</button>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Produto</th>
+            <th>Qtd</th>
+            <th>Preço</th>
+            <th>Subtotal</th>
+            <th>Ação</th>
+          </tr>
+        </thead>
+        <tbody id="lista-produtos">
+          <!-- Produtos vão aqui -->
+        </tbody>
+      </table>
+
+      <div class="total" id="total">Total: R$ 0,00</div>
+
+      <div class="buttons">
+        <button onclick="finalizarVenda()">Finalizar Venda</button>
+        <button onclick="limparVenda()">Cancelar</button>
+      </div>
+    </div>
+
+    <script>
+      const listaProdutos = document.getElementById("lista-produtos");
+      const totalElement = document.getElementById("total");
+      const produtos = [];
+
+      const catalogo = {
+        123: { nome: "Arroz 5kg", preco: 25.9 },
+        456: { nome: "Feijão 1kg", preco: 7.5 },
+        789: { nome: "Coca-Cola 2L", preco: 8.99 },
+      };
+
+      function adicionarProduto() {
+        const codigo = document.getElementById("codigo").value.trim();
+        const item = catalogo[codigo];
+        if (!item) {
+          alert("Produto não encontrado!");
+          return;
+        }
+
+        // Verifica se já está na lista
+        const existente = produtos.find((p) => p.codigo === codigo);
+        if (existente) {
+          existente.qtd++;
+          existente.subtotal = existente.qtd * existente.preco;
+        } else {
+          produtos.push({
+            codigo,
+            nome: item.nome,
+            preco: item.preco,
+            qtd: 1,
+            subtotal: item.preco,
+          });
+        }
+
+        atualizarTabela();
+        document.getElementById("codigo").value = "";
+      }
+
+      function atualizarTabela() {
+        listaProdutos.innerHTML = "";
+        let total = 0;
+
+        produtos.forEach((p, i) => {
+          total += p.subtotal;
+          const linha = `
+          <tr>
+            <td>${p.nome}</td>
+            <td>${p.qtd}</td>
+            <td>R$ ${p.preco.toFixed(2)}</td>
+            <td>R$ ${p.subtotal.toFixed(2)}</td>
+            <td><button onclick="removerProduto(${i})">Remover</button></td>
+          </tr>
+        `;
+          listaProdutos.innerHTML += linha;
+        });
+
+        totalElement.textContent = "Total: R$ " + total.toFixed(2);
+      }
+
+      function removerProduto(index) {
+        produtos.splice(index, 1);
+        atualizarTabela();
+      }
+
+      function limparVenda() {
+        produtos.length = 0;
+        atualizarTabela();
+      }
+
+      function finalizarVenda() {
+        if (produtos.length === 0) {
+          alert("Nenhum produto na venda.");
+          return;
+        }
+        alert("Venda finalizada com sucesso!");
+        limparVenda();
+      }
+
+      // Pressionar Enter para adicionar
+      document
+        .getElementById("codigo")
+        .addEventListener("keypress", function (e) {
+          if (e.key === "Enter") {
+            adicionarProduto();
+          }
+        });
+    </script>
   </body>
 </html>

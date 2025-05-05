@@ -40,7 +40,7 @@ function createSubWindow(pagina) {
   subWindow.maximize();
 
   // Esconde a janela principal (opcional, se desejar)
-  // mainWindow.hide();
+  mainWindow.hide();
 
   // Quando fechar a sub-janela, volta com a principal
   subWindow.on("closed", () => {
